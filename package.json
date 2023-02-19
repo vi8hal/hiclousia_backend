@@ -1,0 +1,30 @@
+{
+  "name": "hiclousia_backend",
+  "version": "1.0.0",
+  "description": "Backend using NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vi8hal/hiclousia_backend.git"
+  },
+  "author": "\"Vishal - Neeraja\"",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vi8hal/hiclousia_backend.git"
+  },
+  "homepage": "https://github.com/vi8hal/hiclousia_backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^5.13.9",
+    "morgan": "^1.10.0",
+    "validator": "^13.9.0"
+  }
+}

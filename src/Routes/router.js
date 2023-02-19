@@ -1,13 +1,19 @@
-const recruiterController = require("../Controllers/recruiterController");
-const jobpostController = require("../Controllers/jobPostController");
-const userController = require("../Controllers/userController")
 
+const userController = require("../Controllers/userController")
+const infoController=require("../Controllers/infoController")
 const express = require("express");
 const router = express.Router();
 
-router.post('/recruiter',recruiterController.createRecruiter)
-router.post('/Createjobposts', jobpostController.createJobPost)
-router.post('/CreateUsePortfolio', userController.createUsePortfolio)
+
+router.post("/create",userController.register)
+router.post("/login",userController.loginUser)
+
+router.post("/experience",infoController.experienceInfo)
+router.post("/education",infoController.educationInfo)
+router.post("/project",infoController.projectInfo)
+router.post("/skill",infoController.skillsInfo)
+
+router.get("/personal/:id",infoController.personalInfo)
 
 
 
