@@ -11,16 +11,16 @@ const projectsSchema = new mongoose.Schema(
             required: true
         },
         startDate: {
-            type: Date,
-            required: true
+            type: String,
+           
         },
         endDate: {
-            type: Date,
-            required: true
+            type: String,
+            
         },
         organizatioName: {
             type: String,
-            required: true
+      
         },
         description:{
             type: String,

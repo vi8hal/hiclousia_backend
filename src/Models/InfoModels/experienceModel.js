@@ -10,7 +10,6 @@ const ExperienceSchema = new mongoose.Schema(
             type: String,
             default: 'Active'
         },
-        
         title: {
             type: String,
             required: true,
