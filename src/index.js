@@ -27,7 +27,6 @@ mongoose.connect('mongodb+srv://Neeraja:Hiclousia@123@cluster0.koj69cg.mongodb.n
 .then(() => {console.log("MongoDB Is Connected To Hiclousia")})
 .catch((err )=> console.log(err));
 
-
 // PORT
 const port = process.env.PORT || 8000  ;
 

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
-const ExperienceSchema = new mongoose.Schema(
+const experienceSchema = new mongoose.Schema(
     {
         userDetailsID: {
             type: ObjectId,
@@ -18,13 +18,13 @@ const ExperienceSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        CompanyName: {
+        companyName: {
             type: String,
             required: true,
         },
         companyType: {
             type: String,
-            enum: ["MNC", "Start-Ups", "Government", "Service-Based", "Product-Based"]
+            // enum: ["MNC", "Start-Ups", "Government", "Service-Based", "Product-Based"]
         },
         companyLocation: {
             type: String,
@@ -38,4 +38,4 @@ const ExperienceSchema = new mongoose.Schema(
         timestamps: true
     }
 )
-module.exports = mongoose.model("Experience", ExperienceSchema);
+module.exports = mongoose.model("Experience", experienceSchema);

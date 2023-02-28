@@ -1,6 +1,6 @@
-const { request } = require("express");
-const jwt = require("jsonwebtoken");
-const userModel = require("../Models/userModel")
+import { request } from "express";
+import { verify } from "jsonwebtoken";
+import { findById } from "../Models/userModel";
 
 
 const checker = async function (req, res, next) {
@@ -13,9 +13,9 @@ const checker = async function (req, res, next) {
             }
             else token = req.headers.authorization
             // console.log(token)
-            const decodedToken=jwt.verify(token,process.env.JWT_SECRET_KEY)
+            const decodedToken=verify(token,process.env.JWT_SECRET_KEY)
 
-            req.user = await userModel.findById({_id:decodedToken}).select("-password")
+            req.user = await findById({_id:decodedToken}).select("-password")
 
             next()
         }
@@ -30,4 +30,4 @@ const checker = async function (req, res, next) {
 
 }
 
-module.exports = { checker };
+export default { checker };

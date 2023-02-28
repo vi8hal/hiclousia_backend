@@ -9,23 +9,14 @@ const userSchema = new mongoose.Schema(
     },
     lastName: {
       type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-      enum: ["Mr", "Mrs", "Miss"],
+      required: true
     },
     email: {
       type: String,
       required: true,
-      unique: true,
+      unique: true
     },
-    city: {
-      type: String,
-      required: true,
-    },
-    recruter: {
+    recruiter: {
       type: Boolean,
       required: true,
       default: false
@@ -33,7 +24,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-
     },
   },
   { timestamps: true }
