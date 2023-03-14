@@ -6,9 +6,9 @@ const skillsModel = require("../Models/InfoModels/skillsModel.js")
 const userModel = require("../Models/userModel.js")
 const Joi = require('joi');
 // *************************************************************************///
-const educationInfo = async function (req, res) {
+const educationInfo = async function (req, res){
     try {
-        const { userDetailsID, educationLevel, collegeName, authority, discipline, yearOfpassout } = req.body;
+        const { userDetailsID, educationLevel, collegeName, authority, discipline, yearOfpassout} = req.body;
 
         const educationSchema = Joi.object({
             userDetailsID: Joi.string().required(),

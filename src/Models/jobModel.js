@@ -1,10 +1,10 @@
 
-const mongoose = require("mongoose");
+const mongoose = require ("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const jobSchema = new mongoose.Schema(
   {
-    userDetailsID: {
+    userDetailsID:{
       type: ObjectId,
       ref: "user"
     },
@@ -12,11 +12,11 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    experience: {
+    experience:{
       type: String,
       required: true,
     },
-    primarySkills: {
+    primarySkills:{
       type: String,
       required: true,
     },
