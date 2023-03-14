@@ -3,7 +3,6 @@ const Joi = require('joi');
 
 const jobInfo = async (req, res) =>{
     try {
-<<<<<<< HEAD
         const { userDetailsID, jobRole, experience, primarySkill, secondarySkills, jobDiscription, location, company, education, sector} = req.body;
         const jobSchema = Joi.object({
             userDetailsID: Joi.string().required(),
@@ -15,18 +14,6 @@ const jobInfo = async (req, res) =>{
             salary: Joi.string().required(),
             location: Joi.string().required(),
             company: Joi.string().required(),
-=======
-        const { userDetailsID, jobRole, experience, primarySkill, secondarySkills, jobDiscription, type, location, education, sector} = req.body;
-        const jobSchema = Joi.object({
-            userDetailsID: Joi.string().required(),
-            jobRole: Joi.string().required(),
-            experience: Joi.number().required(),
-            primarySkills: Joi.string().required(),
-            secondarySkills: Joi.string().required(),
-            jobDiscription: Joi.string().required(),
-            type: Joi.string().required(),
-            location: Joi.string().required(),
->>>>>>> b3bc4e1bc3732bcd88f79227a8023870d1a1a08a
             education: Joi.string().required(),
             sector: Joi.string().required()
         });
@@ -41,7 +28,6 @@ const jobInfo = async (req, res) =>{
         res.status(500).send({ status: false, message: err.message });
     }
 };
-<<<<<<< HEAD
 const updateJobData = async function(req, res){
   try {
       const jobSchema = Joi.object({
@@ -90,8 +76,6 @@ const updateJobData = async function(req, res){
 }
 }
 
-=======
->>>>>>> b3bc4e1bc3732bcd88f79227a8023870d1a1a08a
 
 const searchJobs = async (req, res) => {
   try {
@@ -102,10 +86,7 @@ const searchJobs = async (req, res) => {
       secondarySkills,
       jobDescription,
       education,
-<<<<<<< HEAD
       company,
-=======
->>>>>>> b3bc4e1bc3732bcd88f79227a8023870d1a1a08a
       location
     } = req.query;
 
@@ -116,11 +97,7 @@ const searchJobs = async (req, res) => {
     }
 
     if (experience) {
-<<<<<<< HEAD
       query.experience = { $regex: experience, $options: 'i' };
-=======
-      query.experience = experience;
->>>>>>> b3bc4e1bc3732bcd88f79227a8023870d1a1a08a
     }
 
     if (primarySkills) {
@@ -139,7 +116,6 @@ const searchJobs = async (req, res) => {
       query.education = { $regex: education, $options: 'i' };
     }
 
-<<<<<<< HEAD
     if (company) {
       query.company = { $regex: company, $options: 'i' };
     }
@@ -149,13 +125,6 @@ const searchJobs = async (req, res) => {
     }
 
     const jobs = await jobModel.find(query );
-=======
-    if (location) {
-      query.location = { $regex: location, $options: '%i' };
-    }
-
-    const jobs = await jobModel.find(query);
->>>>>>> b3bc4e1bc3732bcd88f79227a8023870d1a1a08a
     if (!jobs){
       return res.status(404).json({status: false, message: "Data not found" });
     }
@@ -166,10 +135,4 @@ const searchJobs = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 module.exports = { jobInfo,  searchJobs, updateJobData };
-=======
-
-
-module.exports = { jobInfo,  searchJobs };
->>>>>>> b3bc4e1bc3732bcd88f79227a8023870d1a1a08a
