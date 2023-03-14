@@ -7,7 +7,11 @@ const skillsSchema = new mongoose.Schema(
             type: ObjectId,
             ref: "user"
         },
-        skillTitle: {
+        primarySkills:{
+            type: String,
+            required: true
+        },
+        secondarySkills:{
             type: String,
             required: true
         }

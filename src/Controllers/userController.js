@@ -5,12 +5,13 @@ const Joi = require('joi');
 
 const register = async function (req, res) {
   try {
-    const { firstName, lastName, city, email, title, password } = req.body;
+    const { firstName, lastName, email, recruiter, password } = req.body;
 
     const userSchema = Joi.object({
       firstName: Joi.string().pattern(new RegExp("^[a-zA-Z]")).required(),
       lastName: Joi.string().pattern(new RegExp("^[a-zA-Z]")).required(),
       email: Joi.string().email().required(),
+      recruiter: Joi.string().required(),
       password: Joi.string().min(8).max(15).required()
     });
 
@@ -65,32 +66,32 @@ const loginUser = async function (req, res) {
     res.status(500).send({ status: false, message: err.message });
   }
 };
-// const logOut = async function (req, res) {
-//   try {
-//     const { email, password } = req.body;
+const userGeneral = async function (req, res) {
+  try {
+    const { gitLink, profileLink, gender, doB, phone } = req.body;
 
-//     const userSchema = Joi.object({
-//       password: Joi.string().min(8).max(15).required(),
-//       email: Joi.string().email().required()
-//     });
+    const generaluserinfoSchema = Joi.object({
+      gitLink: Joi.string().required(),
+      profileLink: Joi.string().required(),
+      gender: Joi.string().required(),
+      doB: Joi.string().required(),
+      phone: Joi.string().max().startwith(8).required(),
+    });
 
-//     const validationResult = userSchema.validate(req.body);
+    const validationResult = generaluserinfoSchema.validate(req.body);
 
-//     if (validationResult.error) {
-//       return res.status(400).send({ status: false, message: validationResult.error.details[0].message });
-//     }
+    if (validationResult.error) {
+      return res.status(400).send({ status: false, message: validationResult.error.details[0].message });
+    }
 
-//     const user = await userModel.findOne({ email, password });
+    const user = await userModel.create(req.body);
 
-//     if (!user) {
-//       res.status(400).send({ status: false, message: "Invalid username or password" });
-//     } else {
-//       const token = jwt.sign(user._id.toString(), "Hiclousia"); // should be kept in the env file
-//       res.status(200).send({ status: true, message: "User logged in successfully", token: token, data: user });
-//     }
-//   } catch (err) {
-//     res.status(500).send({ status: false, message: err.message });
-//   }
-// };
+    res.status(201).send({ status: true, message: "Data created successfully" });
+  }
 
-module.exports = { register, loginUser };
+  catch (err) {
+      res.status(500).send({ status: false, message: err.message });
+    }
+  };
+
+  module.exports = { register, loginUser, userGeneral };

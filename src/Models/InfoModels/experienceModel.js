@@ -6,15 +6,11 @@ const experienceSchema = new mongoose.Schema(
             type: ObjectId,
             ref: "user"
         },
-        status: {
+        jobStatus: {
             type: String,
             default: 'Active'
         },
-        title: {
-            type: String,
-            required: true,
-        },
-        typeOfjobs: {
+        jobTitle: {
             type: String,
             required: true,
         },
@@ -32,6 +28,7 @@ const experienceSchema = new mongoose.Schema(
         },
         skills: {
             type: [String],
+            required: true,
         }
     },
     {

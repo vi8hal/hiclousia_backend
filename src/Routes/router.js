@@ -16,7 +16,14 @@ router.post("/education",infoController.educationInfo);
 router.post("/project",infoController.projectInfo);
 router.post("/skill",infoController.skillsInfo);
 router.post("/job",jobController.jobInfo);
+
+router.put("/experience/:id",infoController.updateExperienceData);
+router.put("/education/:id",infoController.updateEducationData);
+router.put("/skill/:id",infoController.updateSkillsData);
+router.put("/job/:id",jobController.updateJobData);
+
 router.get("/personal/:id",infoController.personalInfo);
 router.get("/job",jobController.searchJobs);
+
 
 module.exports = router;

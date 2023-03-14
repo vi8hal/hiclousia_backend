@@ -3,16 +3,17 @@ const Joi = require('joi');
 
 const jobInfo = async (req, res) =>{
     try {
-        const { userDetailsID, jobRole, experience, primarySkill, secondarySkills, jobDiscription, type, location, education, sector} = req.body;
+        const { userDetailsID, jobRole, experience, primarySkill, secondarySkills, jobDiscription, location, company, education, sector} = req.body;
         const jobSchema = Joi.object({
             userDetailsID: Joi.string().required(),
             jobRole: Joi.string().required(),
-            experience: Joi.number().required(),
+            experience: Joi.string().required(),
             primarySkills: Joi.string().required(),
             secondarySkills: Joi.string().required(),
             jobDiscription: Joi.string().required(),
-            salary: Joi.number().required(),
+            salary: Joi.string().required(),
             location: Joi.string().required(),
+            company: Joi.string().required(),
             education: Joi.string().required(),
             sector: Joi.string().required()
         });
@@ -27,6 +28,54 @@ const jobInfo = async (req, res) =>{
         res.status(500).send({ status: false, message: err.message });
     }
 };
+const updateJobData = async function(req, res){
+  try {
+      const jobSchema = Joi.object({
+
+          userDetailsID: Joi.string(),
+          jobRole: Joi.string(),
+          experience: Joi.string(),
+          primarySkills: Joi.string(),
+          secondarySkills: Joi.string(),
+          jobDiscription: Joi.string(),
+          salary: Joi.string(),
+          location: Joi.string(),
+          company: Joi.string(),
+          education: Joi.string(),
+          sector: Joi.string(),
+      });
+      const validationResult = jobSchema.validate(req.body, { abortEarly: false });
+      if (validationResult.error) {
+          return res.status(400).send({ status: false, message: validationResult.error.details[0].message });
+      };
+      const id  = req.params.id;
+          let jobData = {};
+          jobData=  await jobModel.findById({_id: id});
+          if (!jobData) {
+              return res.status(404).send({ status: false, message: 'Job data not found' });
+          }
+   // if (req.method === 'PUT') {
+          jobData.userDetailsID = req.body.userDetailsID;
+          jobData.primarySkills = req.body.primarySkills;
+          jobData.secondarySkills = req.body.secondarySkills;
+          jobData.jobDiscription = req.body.jobDiscription;
+          jobData.salary = req.body.salary;
+          jobData.location = req.body.location;
+          jobData.company = req.body.company;
+          jobData.education= req.body.education;
+          jobData.sector= req.body.sector;
+          jobData.experience=req.body.experience;
+          jobData.jobRole=req.body.jobRole;
+
+      
+      const updatedData = await jobModel.findByIdAndUpdate({_id: id}, jobData, {new:true});
+      return res.status(200).send({ status: true, data: updatedData, message: 'Job data updated' });
+      // 
+  } catch (err) {
+  return res.status(500).send({ status: false, message: err.message })
+}
+}
+
 
 const searchJobs = async (req, res) => {
   try {
@@ -37,17 +86,18 @@ const searchJobs = async (req, res) => {
       secondarySkills,
       jobDescription,
       education,
+      company,
       location
     } = req.query;
 
     const query = {};
 
     if (jobRole) {
-      query.jobRole = { $regex: jobRole, $options: '' };
+      query.jobRole = { $regex: jobRole, $options: 'i' };
     }
 
     if (experience) {
-      query.experience = experience;
+      query.experience = { $regex: experience, $options: 'i' };
     }
 
     if (primarySkills) {
@@ -66,11 +116,15 @@ const searchJobs = async (req, res) => {
       query.education = { $regex: education, $options: 'i' };
     }
 
+    if (company) {
+      query.company = { $regex: company, $options: 'i' };
+    }
+
     if (location) {
       query.location = { $regex: location, $options: 'i' };
     }
 
-    const jobs = await jobModel.find(query);
+    const jobs = await jobModel.find(query );
     if (!jobs){
       return res.status(404).json({status: false, message: "Data not found" });
     }
@@ -81,4 +135,4 @@ const searchJobs = async (req, res) => {
   }
 };
 
-module.exports = { jobInfo,  searchJobs };
+module.exports = { jobInfo,  searchJobs, updateJobData };

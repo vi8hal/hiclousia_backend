@@ -1,4 +1,4 @@
-const { number } = require("joi");
+
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -13,7 +13,7 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     experience: {
-      type: Number,
+      type: String,
       required: true,
     },
     primarySkills: {
@@ -29,17 +29,26 @@ const jobSchema = new mongoose.Schema(
       required: true
     },
     salary: {
-      type: Number,
+      type: String,
       required: true
     },
     education: {
       type: String,
       required: true
     },
+    company: {
+      type: String,
+      required: true,
+    },
     location: {
       type: String,
       required: true,
+    },
+    sector: {
+      type: String,
+      required: true,
     }
+    
   },
   { timestamps: true }
 );
